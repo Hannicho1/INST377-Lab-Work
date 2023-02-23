@@ -10,6 +10,7 @@ function filterList(list, query) {
     const lowerCaseQuery = query.toLowerCase();
     return lowerCaseName.includes(lowerCaseQuery);
   })
+  
   /*
     Using the .filter array method, 
     return a list that is filtered by comparing the item name in lower case
@@ -22,6 +23,7 @@ function filterList(list, query) {
 async function mainEvent() { // the async keyword means we can make API requests
   const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
   const filterButton = document.querySelector('.filter_button');
+
   // Add a querySelector that targets your filter button here
 
   let currentList = []; // this is "scoped" to the main event function
@@ -61,16 +63,16 @@ async function mainEvent() { // the async keyword means we can make API requests
   });
 
   filterButton.addEventListener('click', (event) => {
-      console.log('clicked FilterButton');
+    console.log('clicked FilterButton');
 
-      const formData = new FormData(mainForm);
-      const formProps = Object.fromEntries(formData);
+    const formData = new FormData(mainForm);
+    const formProps = Object.fromEntries(formData);
 
-      console.log(formProps);
-      const newlist = filterList(currentList, formProps.resto);
+    console.log(formProps);
+    const newlist = filterList(currentList, formProps.resto);
 
-      console.log(newlist);
-    })
+    console.log(newlist);
+  })
 
 
   /*
