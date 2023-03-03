@@ -1,3 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hana Goffe Labs for INST377</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <h1>Hana Goffe Labs For INST377</h1>
+      </header>
+      <div class="container">
+        <div class="left_section box">
+            <h2>Form Inputs</h2> 
+          <form action="https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json" 
+          class="box main_form">
+          <div>
+            <label for="resto">Restaurant Name</label>
+            <input type="text" id="resto" name="resto" />
+            </div>
+            <button type="submit">load Data</button>
+            <button type="button" class="filter_button">Filter Data</button>
+          </form>
+        </div>
+        <div class="right_section box">
+          <h2>Local Restaurants list</h2>
+          <div class="box" id="restaurant_list"> 
+            A list of Restaurants from an APi
+        </div>
+        </div>
+      </div>
+      <footer class="footer">
+      MY GITHUB ACCOUNT NAME <a href="https://github.com/Hannicho1">  Hannicho1 </a>
+    </footer>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
 <!-- Bring in your successful HTML/CSS from the Flexbox lab -->
 <!-- Your page will need a form in it, but that form will not need an action
     You will need to add the attribute "name" to your input
