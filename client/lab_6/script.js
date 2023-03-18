@@ -30,22 +30,39 @@ function filterList(list, query) {
   */
 }
 
+function cutRestaurantList(list){
+  console.log('fired cut list');
+  const range = [...Array(15).keys()];
+  return newArray = range.map((item) => {
+      const index = getRandomIntInclusive(0, list.length -1);
+      return list[index]
+
+  })
+
+
+}
 async function mainEvent() { // the async keyword means we can make API requests
   const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
-  const filterButton = document.querySelector('.filter_button');
+  const filterButton = document.querySelector('#filter');
+  const loadDataButton = document.querySelector('#data_load');
+  const generateListButton = document.querySelector('#generate');
+
+  const loadAnimation = document.querySelector('#data_load_animation');
+  loadAnimation.style.display = 'none';
 
   // Add a querySelector that targets your filter button here
 
   let currentList = []; // this is "scoped" to the main event function
   
   /* We need to listen to an "event" to have something happen in our page - here we're listening for a "submit" */
-  mainForm.addEventListener('submit', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
+  loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
     
     // This prevents your page from becoming a list of 1000 records from the county, even if your form still has an action set on it
-    submitEvent.preventDefault(); 
+    
     
     // this is substituting for a "breakpoint" - it prints to the browser to tell us we successfully submitted the form
-    console.log('form submission'); 
+    console.log('loading data'); 
+    loadAnimation.style.display = 'inline-block';
 
     /*
       ## GET requests and Javascript
@@ -63,20 +80,33 @@ async function mainEvent() { // the async keyword means we can make API requests
 
     // This changes the response from the GET into data we can use - an "object"
     currentList = await results.json();
+
+    loadAnimation.style.display = 'none';
     console.table(currentList); 
-    injectHTML(currentList);
+   
   });
 
-  filterButton.addEventListener('click', (event) => {
-      console.log('clicked FilterButton');
+  filterDataButton.addEventListener('click', (event) => {
+      console.log('clicked filterButton');
 
       const formData = new FormData(mainForm);
       const formProps = Object.fromEntries(formData);
 
       console.log(formProps);
       const newlist = filterList(currentList, formProps.resto);
+     
 
-      console.log(newlist);
+    console.log(newlist);
+    injectHTML(newlist);
+    })
+
+    generateListButton.addEventListener('click', (event) => {
+      console.log('generate new list');
+      const restaurantList = cutRestaurantList(currentList);
+      console.log(restaurantList);
+      injectHTML(restaurantList);
+
+
     })
 
 
