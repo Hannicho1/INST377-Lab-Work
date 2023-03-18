@@ -2,6 +2,17 @@
   Hook this script to index.html
   by adding `<script src="script.js">` just before your closing `</body>` tag
 */
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+}
+
+function injectHTML(list) {
+ console.log('fired injectHTML')
+  const target = document.querySelector('#restaurant_list');
+
+}
 
 /* A quick filter that will return something based on a matching input */
 function filterList(list, query) {
