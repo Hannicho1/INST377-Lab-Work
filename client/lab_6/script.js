@@ -43,7 +43,7 @@ function cutRestaurantList(list){
 }
 async function mainEvent() { // the async keyword means we can make API requests
   const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
-  const filterButton = document.querySelector('#filter');
+  const filterDataButton = document.querySelector('#filter');
   const loadDataButton = document.querySelector('#data_load');
   const generateListButton = document.querySelector('#generate');
 
@@ -56,13 +56,13 @@ async function mainEvent() { // the async keyword means we can make API requests
   
   /* We need to listen to an "event" to have something happen in our page - here we're listening for a "submit" */
   loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
+    console.log('Loaading data');
+    loadAnimation.style.display = 'inline-block';
     
     // This prevents your page from becoming a list of 1000 records from the county, even if your form still has an action set on it
     
     
     // this is substituting for a "breakpoint" - it prints to the browser to tell us we successfully submitted the form
-    console.log('loading data'); 
-    loadAnimation.style.display = 'inline-block';
 
     /*
       ## GET requests and Javascript
@@ -80,7 +80,6 @@ async function mainEvent() { // the async keyword means we can make API requests
 
     // This changes the response from the GET into data we can use - an "object"
     currentList = await results.json();
-
     loadAnimation.style.display = 'none';
     console.table(currentList); 
    
@@ -102,9 +101,9 @@ async function mainEvent() { // the async keyword means we can make API requests
 
     generateListButton.addEventListener('click', (event) => {
       console.log('generate new list');
-      const restaurantList = cutRestaurantList(currentList);
-      console.log(restaurantList);
-      injectHTML(restaurantList);
+      const restaurantsList = cutRestaurantList(currentList);
+      console.log(restaurantsList);
+      injectHTML(restaurantsList);
 
 
     })
@@ -127,4 +126,3 @@ async function mainEvent() { // the async keyword means we can make API requests
   In this case, we load some data when the form has submitted
 */
 document.addEventListener('DOMContentLoaded', async () => mainEvent()); // the async keyword means we can make API requests
-}
