@@ -14,6 +14,7 @@ function injectHTML(list) {
     const str = `<li>${item.name}</li>`;
     target.innerHTML += str
   })
+}
 
 function filterList(list, query) {
   return list.filter((item) => {
