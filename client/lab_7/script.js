@@ -47,9 +47,12 @@ function getRandomIntInclusive(min, max) {
     const filterDataButton = document.querySelector('#filter');
     const loadDataButton = document.querySelector('#data_load');
     const generateListButton = document.querySelector('#generate');
+    const textField = document.querySelector('#resto');
   
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
+
+    let storedList = [];
   
     // Add a querySelector that targets your filter button here
   
@@ -80,9 +83,9 @@ function getRandomIntInclusive(min, max) {
       const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   
       // This changes the response from the GET into data we can use - an "object"
-      currentList = await results.json();
+      storedList = await results.json();
       loadAnimation.style.display = 'none';
-      console.table(currentList); 
+      console.table(storedList); 
      
     });
   
@@ -93,20 +96,27 @@ function getRandomIntInclusive(min, max) {
         const formProps = Object.fromEntries(formData);
   
         console.log(formProps);
-        const newlist = filterList(currentList, formProps.resto);
+        const newList = filterList(currentList, formProps.resto);
        
   
-      console.log(newlist);
-      injectHTML(newlist);
+      console.log(newList);
+      injectHTML(newList);
       })
   
       generateListButton.addEventListener('click', (event) => {
         console.log('generate new list');
-        const restaurantList = cutRestaurantList(currentList);
-        console.log(restaurantList);
-        injectHTML(restaurantList);
+        currentList = cutRestaurantList(storedList);
+        console.log(currentList);
+        injectHTML(currentList);
   
   
+      })
+
+      textField.addEventListener('input', (event) => {
+        console.log('input', event.target.value);
+        const newList = filterList(currentList, event.target.value);
+        console.log(newList);
+        injectHTML(newList);
       })
   
   
